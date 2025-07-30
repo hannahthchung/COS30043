@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 8.1P - Student Marks Table</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+  <style>
+    .pagination li {
+      cursor: pointer;
+    }
+    .pagination .active .page-link {
+      background-color: #0d6efd;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="container mt-5">
+    <h2 class="mb-4">Student Marks Table</h2>
+
+    <table class="table table-bordered table-striped" aria-describedby="tableCaption">
+      <thead class="table-dark">
+        <tr>
+          <th id="th-name" scope="col">Name</th>
+          <th id="th-mark" scope="col">Mark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(student, index) in paginatedData" :key="index">
+          <td headers="th-name">{{ student.name }}</td>
+          <td headers="th-mark">{{ student.mark }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" @click.prevent="changePage(currentPage - 1)">Prev Page</a>
+        </li>
+        <li
+          class="page-item"
+          v-for="page in pageCount"
+          :key="page"
+          :class="{ active: currentPage === page }"
+        >
+          <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === pageCount }">
+          <a class="page-link" href="#" @click.prevent="changePage(currentPage + 1)">Next Page</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

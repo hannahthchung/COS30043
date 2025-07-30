@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SwinEvent Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    :root {
+      --primary-color: #64748b;
+      --secondary-color: #4b5563;
+      --success-color: #22c55e;
+      --warning-color: #facc15;
+      --danger-color: #f87171;
+      --dark-color: #1e293b;
+      --light-bg: #f1f5f9;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --card-hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      background: var(--light-bg);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark-color);
+    }
+
+    .main-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    .app-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 2rem;
+      border-radius: 20px 20px 0 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .app-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .content-area {
+      padding: 2rem;
+    }
+
+    .login-title {
+        color: #c8102e;
+        font-weight: bold;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      padding: 2rem;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .login-card:hover {
+      box-shadow: var(--card-hover-shadow);
+      transform: translateY(-2px);
+    }
+
+    .welcome-section {
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      border: none;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .event-card:hover {
+      box-shadow: var(--card-hover-shadow);
+      transform: translateY(-3px);
+    }
+
+    .event-card-header {
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .event-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      margin: 0;
+    }
+
+    .event-type-badge {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .type-workshop { background: #dbeafe; color: #1e40af; }
+    .type-club { background: #f3e8ff; color: #7c3aed; }
+    .type-social { background: #ecfdf5; color: #059669; }
+    .type-free-food { background: #fef3c7; color: #d97706; }
+
+    .event-card-body {
+      padding: 1.5rem;
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    .event-meta i {
+      color: var(--primary-color);
+    }
+
+    .interested-count {
+      background: linear-gradient(135deg, var(--warning-color), #f59e0b);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-custom {
+      border-radius: 10px;
+      font-weight: 500;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
+    }
+
+    .btn-success-custom {
+      background: linear-gradient(135deg, var(--success-color), #16a34a);
+      color: white;
+    }
+
+    .btn-success-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-warning-custom {
+      background: linear-gradient(135deg, var(--warning-color), #eab308);
+      color: white;
+    }
+
+    .btn-warning-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+    }
+
+    .btn-danger-custom {
+      background: linear-gradient(135deg, var(--danger-color), #ef4444);
+      color: white;
+    }
+
+    .btn-danger-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(248, 113, 113, 0.4);
+    }
+
+    .form-control-custom {
+      border-radius: 10px;
+      border: 2px solid #e5e7eb;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control-custom:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+    }
+
+    .search-filter-section {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+
+    .pagination-custom .page-link {
+      border-radius: 8px;
+      margin: 0 2px;
+      border: none;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    .pagination-custom .page-item.active .page-link {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: white;
+      font-weight: 600;
+    }
+
+    .form-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #6b7280;
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: #d1d5db;
+      margin-bottom: 1rem;
+    }
+
+    /* Enhanced Join Button Styles */
+    .joined-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .joined-btn:hover {
+      background: linear-gradient(135deg, #16a34a, #15803d) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .joined-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .joined-btn:hover::after {
+      left: 100%;
+    }
+
+    .btn-outline-success {
+      border: 2px solid var(--success-color);
+      color: var(--success-color);
+      background: transparent;
+    }
+
+    .btn-outline-success:hover {
+      background: var(--success-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-color);
+      border: none;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(75, 85, 99, 0.4);
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* Enhanced Interested Button Styles */
+    .interested-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .interested-btn:hover {
+      background: linear-gradient(135deg, #374151, #1f2937) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(75, 85, 99, 0.4);
+    }
+
+    .interested-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .interested-btn:hover::after {
+      left: 100%;
+    }
+
+    /* New Interested Button Styles */
+    .btn-interested-default {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      background: transparent;
+    }
+
+    .btn-interested-default:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
+    }
+
+    .btn-interested-active {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-interested-active:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)) !important; /* Slightly reverse gradient on hover */
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(75, 85, 99, 0.4);
+    }
+
+    .btn-interested-active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-interested-active:hover::after {
+      left: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        margin: 10px;
+        border-radius: 15px;
+      }
+      
+      .app-header {
+        padding: 1.5rem;
+        border-radius: 15px 15px 0 0;
+      }
+      
+      .app-title {
+        font-size: 2rem;
+      }
+      
+      .content-area {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div class="main-container">
+      <div class="content-area">
+        <app-main></app-main>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

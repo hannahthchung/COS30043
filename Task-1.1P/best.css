@@ -1,0 +1,42 @@
+body {
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  h1 {
+    color: navy;
+    margin-top: 40px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #555;
+  }
+
+  .sub {
+    color: darkgray;
+    font-size: 14px;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  #output {
+    margin-top: 30px;
+    font-size: 20px;
+    color: green;
+  }
+  

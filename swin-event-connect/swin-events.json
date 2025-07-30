@@ -1,0 +1,146 @@
+[
+  {
+    "title": "Free Pizza Day 🍕",
+    "desc": "Come grab a free slice and chill with friends at the library lawn!",
+    "date": "2025-08-01",
+    "type": "Free Food",
+    "user": "104051111@student.swin.edu.au",
+    "hostName": "Minh Nguyen",
+    "interested": 3
+  },
+  {
+    "title": "Resume Workshop by Career Centre",
+    "desc": "Get your CV reviewed and learn tips to land internships in Australia.",
+    "date": "2025-08-05",
+    "type": "Workshop",
+    "user": "104053456@student.swin.edu.au",
+    "hostName": "Olivia Tran",
+    "interested": 5
+  },
+  {
+    "title": "Industry Networking Night 🤝",
+    "desc": "Connect with industry professionals and alumni. Formal attire required.",
+    "date": "2025-08-08",
+    "type": "Workshop",
+    "user": "sarah.johnson@swin.edu.au",
+    "hostName": "Dr. Sarah Johnson",
+    "interested": 18
+  },
+  {
+    "title": "Tet Celebration 🧧",
+    "desc": "Experience traditional games, food stalls, and lion dance at Swinburne HCMC.",
+    "date": "2025-01-30",
+    "type": "Social",
+    "user": "104058888@student.swin.edu.au",
+    "hostName": "Khoa Le",
+    "interested": 12
+  },
+  {
+    "title": "Research Symposium 2025 📊",
+    "desc": "Present your research projects and learn from faculty presentations. Open to all students.",
+    "date": "2025-09-15",
+    "type": "Workshop",
+    "user": "michael.chen@swin.edu.au",
+    "hostName": "Prof. Michael Chen",
+    "interested": 22
+  },
+  {
+    "title": "Mid-Autumn Mooncake Party 🌕",
+    "desc": "Lantern-making and free mooncakes in the student lounge.",
+    "date": "2025-09-10",
+    "type": "Social",
+    "user": "104057777@student.swin.edu.au",
+    "hostName": "Trang Pham",
+    "interested": 7
+  },
+  {
+    "title": "Mental Health & Mindfulness Session",
+    "desc": "De-stress with guided meditation. Open to all Swin students.",
+    "date": "2025-08-15",
+    "type": "Workshop",
+    "user": "104050102@student.swin.edu.au",
+    "hostName": "Daniel Vu",
+    "interested": 8
+  },
+  {
+    "title": "Faculty Coffee Chat ☕",
+    "desc": "Informal discussion with faculty members about career paths and academic opportunities.",
+    "date": "2025-08-20",
+    "type": "Social",
+    "user": "emma.wilson@swin.edu.au",
+    "hostName": "Dr. Emma Wilson",
+    "interested": 14
+  },
+  {
+    "title": "Coding Club Hackathon 💻",
+    "desc": "Form teams and build something awesome in 24 hours! Pizza & prizes included.",
+    "date": "2025-10-20",
+    "type": "Club",
+    "user": "104056789@student.swin.edu.au",
+    "hostName": "Anh Hoang",
+    "interested": 15
+  },
+  {
+    "title": "Aussie BBQ Social 🍖",
+    "desc": "Join us for sausages, music, and new mates! Free for all Swinburne students.",
+    "date": "2025-08-12",
+    "type": "Free Food",
+    "user": "104054444@student.swin.edu.au",
+    "hostName": "Jacob Nguyen",
+    "interested": 9
+  },
+  {
+    "title": "Graduate School Information Session 🎓",
+    "desc": "Learn about postgraduate opportunities, scholarships, and application processes.",
+    "date": "2025-09-25",
+    "type": "Workshop",
+    "user": "david.martinez@swin.edu.au",
+    "hostName": "Dr. David Martinez",
+    "interested": 16
+  },
+  {
+    "title": "IELTS Speaking Practice Circle 🇬🇧",
+    "desc": "Casual English speaking sessions hosted by international tutors.",
+    "date": "2025-08-18",
+    "type": "Workshop",
+    "user": "104052345@student.swin.edu.au",
+    "hostName": "Linh Huynh",
+    "interested": 6
+  },
+  {
+    "title": "Innovation Lab Open Day 🔬",
+    "desc": "Explore cutting-edge research facilities and meet our research teams.",
+    "date": "2025-10-05",
+    "type": "Workshop",
+    "user": "lisa.thompson@swin.edu.au",
+    "hostName": "Prof. Lisa Thompson",
+    "interested": 20
+  },
+  {
+    "title": "Startup Pitch Night 🚀",
+    "desc": "Pitch your idea to a panel of real VCs and tech mentors. RSVP required.",
+    "date": "2025-11-05",
+    "type": "Workshop",
+    "user": "104050321@student.swin.edu.au",
+    "hostName": "Kevin Tran",
+    "interested": 11
+  },
+  {
+    "title": "Anime Club Cosplay Night 🎭",
+    "desc": "Dress as your favorite character! Snacks, karaoke, and fan voting.",
+    "date": "2025-08-25",
+    "type": "Club",
+    "user": "104059999@student.swin.edu.au",
+    "hostName": "Mai Phuong",
+    "interested": 13
+  },
+  {
+    "title": "International Student Welcome Lunch 🌍",
+    "desc": "Meet fellow international students and learn about support services available.",
+    "date": "2025-07-28",
+    "type": "Free Food",
+    "user": "swinburne_fe@swin.edu.au",
+    "hostName": "Swin Academic HCMC Office",
+    "interested": 25
+  }
+]

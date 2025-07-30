@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task-3.1P - String Test Web App</title>
+</head>
+<body>
+  <h1>String Test Web App</h1>
+
+  <div id="app">
+    <p>
+      Please enter your name:
+      <input type="text" v-model="strName">
+    </p>
+
+    <p v-show="strName.toLowerCase() === myName.toLowerCase()">Awesome name!</p>
+
+    <p v-show="strName && strName.toLowerCase() !== myName.toLowerCase()">
+      {{ strName }} is not my name!
+    </p>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          strName: '',
+          myName: 'han thanh' 
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

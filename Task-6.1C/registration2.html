@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app" class="container mt-5">
+  <h2 class="mb-4">Registration Form</h2>
+  <form @submit.prevent="submitForm" method="post" action="http://mercury.swin.edu.au/it000000/formtest.php" novalidate>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="firstName" class="form-label">First Name *</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" v-model="form.firstName">
+        <div class="text-danger" v-if="errors.firstName">{{ errors.firstName }}</div>
+      </div>
+      <div class="col-md-6">
+        <label for="lastName" class="form-label">Last Name *</label>
+        <input type="text" class="form-control" id="lastName" name="lastName" v-model="form.lastName">
+        <div class="text-danger" v-if="errors.lastName">{{ errors.lastName }}</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Username *</label>
+      <input type="text" class="form-control" id="username" name="username" v-model="form.username">
+      <div class="text-danger" v-if="errors.username">{{ errors.username }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password *</label>
+      <input type="password" class="form-control" id="password" name="password" v-model="form.password">
+      <div class="text-danger" v-if="errors.password">{{ errors.password }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password *</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" v-model="form.confirmPassword">
+      <div class="text-danger" v-if="errors.confirmPassword">{{ errors.confirmPassword }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email *</label>
+      <input type="email" class="form-control" id="email" name="email" v-model="form.email">
+      <div class="text-danger" v-if="errors.email">{{ errors.email }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="street" class="form-label">Street Address</label>
+      <input type="text" class="form-control" id="street" name="street" v-model="form.street">
+      <div class="text-danger" v-if="errors.street">{{ errors.street }}</div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="suburb" class="form-label">Suburb</label>
+        <input type="text" class="form-control" id="suburb" name="suburb" v-model="form.suburb">
+        <div class="text-danger" v-if="errors.suburb">{{ errors.suburb }}</div>
+      </div>
+      <div class="col-md-6">
+        <label for="postcode" class="form-label">Postcode *</label>
+        <input type="text" class="form-control" id="postcode" name="postcode" v-model="form.postcode">
+        <div class="text-danger" v-if="errors.postcode">{{ errors.postcode }}</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="mobile" class="form-label">Mobile Number *</label>
+      <input type="text" class="form-control" id="mobile" name="mobile" v-model="form.mobile">
+      <div class="text-danger" v-if="errors.mobile">{{ errors.mobile }}</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary me-2">Submit</button>
+    <button type="button" class="btn btn-secondary" @click="toggleTerms">
+      {{ showTerms ? 'Hide' : 'Show' }} Terms and Conditions
+    </button>
+
+    <div class="mt-3" v-if="showTerms">
+        <p class="mb-2">By registering for this service, you agree to the following terms:</p>
+        <ul class="mb-2">
+            <li>You will provide accurate and truthful information</li>
+            <li>You will not share your account credentials with others</li>
+            <li>You agree to use this service responsibly and legally</li>
+            <li>We reserve the right to terminate accounts that violate our policies</li>
+        </ul>
+        <p class="mb-0"><small>These terms are subject to change. Continued use of the service constitutes acceptance of any modifications.</small></p>    </div>
+  </form>
+</div>
+
+<script src="https://unpkg.com/vue@3"></script>
+<script src="appregistration2.js"></script>
+</body>
+</html>

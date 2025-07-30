@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-3.2P-Lookup Units</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="container">
+    <h1>Lookup App: Unit Search Filter</h1>
+
+    <div class="row">
+      <div class="col-sm-4">
+        <p>
+          <label for="code">Code:</label><br>
+          <input type="text" id="code" v-model="obj.code" placeholder="Enter unit code:">
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p>
+          <label for="desc">Description:</label><br>
+          <input type="text" id="desc" v-model="obj.desc" placeholder="Enter description:">
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <fieldset>
+          <legend class="fs-6">Unit Type:</legend>
+          <div class="form-check">
+            <input type="radio" id="core" v-model="obj.type" value="core" class="form-check-input">
+            <label for="core" class="form-check-label">Core</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="software-development" v-model="obj.type" value="software development" class="form-check-input">
+            <label for="software-development" class="form-check-label">Software Development</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="systems-analysis" v-model="obj.type" value="systems analysis" class="form-check-input">
+            <label for="systems-analysis" class="form-check-label">Systems Analysis</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="all" v-model="obj.type" value="all" class="form-check-input">
+            <label for="all" class="form-check-label">All</label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Description</th>
+                <th scope="col">Credit Points</th>
+                <th scope="col">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="unit in objs" :key="unit.code">
+                <td>{{ unit.code }}</td>
+                <td>{{ unit.desc }}</td>
+                <td>{{ unit.cp.toFixed(2) }}</td>
+                <td>{{ unit.type }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          obj: { code: '', desc: '', cp: 12.5, type: 'all' },
+          units: [
+            {code:'ICT10001', desc:'Problem Solving with ICT', cp:12.5, type:'Core'},
+            {code:'COS10005', desc:'Web Development', cp:12.5, type:'Core'},
+            {code:'INF10003', desc:'Introduction to Business Information Systems', cp:12.5, type:'Core'},
+            {code:'INF10002', desc:'Database Analysis and Design', cp:12.5, type:'Core'},
+            {code:'COS10009', desc:'Introduction to Programming', cp:12.5, type:'Core'},
+            {code:'INF30029', desc:'Information Technology Project Management', cp:12.5, type:'Core'},
+            {code:'ICT30005', desc:'Professional Issues in Information Technology', cp:12.5, type:'Core'},
+            {code:'ICT30001', desc:'Information Technology Project', cp:12.5, type:'Core'},
+            {code:'COS20001', desc:'User-Centred Design', cp:12.5, type:'Software Development'},
+            {code:'TNE10005', desc:'Network Administration', cp:12.5, type:'Software Development'},
+            {code:'COS20016', desc:'Operating System Configuration', cp:12.5, type:'Software Development'},
+            {code:'SWE20001', desc:'Development Project 1 - Tools and Practices', cp:12.5, type:'Software Development'},
+            {code:'COS20007', desc:'Object Oriented Programming', cp:12.5, type:'Software Development'},
+            {code:'COS30015', desc:'IT Security', cp:12.5, type:'Software Development'},
+            {code:'COS30043', desc:'Interface Design and Development', cp:12.5, type:'Software Development'},
+            {code:'COS30017', desc:'Software Development for Mobile Devices', cp:12.5, type:'Software Development'},
+            {code:'INF20012', desc:'Enterprise Systems', cp:12.5, type:'Systems Analysis'},
+            {code:'ACC10007', desc:'Financial Information for Decision Making', cp:12.5, type:'Systems Analysis'},
+            {code:'INF20003', desc:'Requirements Analysis and Modelling', cp:12.5, type:'Systems Analysis'},
+            {code:'ACC20014', desc:'Management Decision Making', cp:12.5, type:'Systems Analysis'},
+            {code:'INF30005', desc:'Business Process Management', cp:12.5, type:'Systems Analysis'},
+            {code:'INF30003', desc:'Business Information Systems Analysis', cp:12.5, type:'Systems Analysis'},
+            {code:'INF30020', desc:'Information Systems Risk and Security', cp:12.5, type:'Systems Analysis'},
+            {code:'INF30001', desc:'Systems Acquisition & Implementation Management', cp:12.5, type:'Systems Analysis'}
+          ]
+        };
+      },
+      computed: {
+        objs() {
+          return this.units
+            .filter(u => {
+              let typeFilter = true;
+              if (this.obj.type && this.obj.type !== 'all') {
+                typeFilter = u.type.toLowerCase() === this.obj.type.toLowerCase();
+              }
+              const codeFilter = u.code.toLowerCase().includes(this.obj.code.toLowerCase());
+              const descFilter = u.desc.toLowerCase().includes(this.obj.desc.toLowerCase());
+              return typeFilter && codeFilter && descFilter;
+            })
+            .sort((a, b) => a.desc.toLowerCase().localeCompare(b.desc.toLowerCase()));
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>

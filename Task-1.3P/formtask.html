@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WAI Form Task</title>
+  <meta charset="utf-8" >
+  <meta name="language" content="english" >
+  <meta name="keywords" content="Accessibility,Lab,Tasks" >
+  <meta name="description" content="WAI Form Task" >
+</head>
+<body>
+  <h1>WAI Form Example</h1>
+  <form method="post" action="http://mercury.swin.edu.au/it000000/formtest.php">
+    <p>Contact Information</p>
+    <label for="cname">Name:</label>
+    <input type="text" name="cname" id="cname">
+    <br><br>
+    <label for="cemail">Email:</label>
+    <input type="text" name="cemail" id="cemail">
+    <br><br>
+    <label for="caddr">Mailing Address:</label><br>
+    <textarea name="caddr" id="caddr" rows="4" cols="40"></textarea>
+    <br>
+    <fieldset>
+      <legend>Credit Card Information</legend>
+
+      <p>
+        <input type="radio" name="card" id="cvisa" value="visa" />
+        <label for="cvisa">Visa</label>
+        <input type="radio" name="card" id="cmc" value="mc">
+        <label for="cmc">Mastercard</label>
+          <br><br>
+        <label for="cnumber">Number:</label>
+        <input type="text" name="number" id="cnumber"><br>
+          <br>
+        <label for="cexpiry">Expiry:</label>
+        <input type="text" name="expiry" id="cexpiry">
+      </p>
+
+      <p>
+        <button type="submit" title="submit" value="Submit order">Submit order</button>
+        <button type="reset" title="clear" value="Clear order">Clear order</button>
+      </p>
+    </fieldset>
+  </form>
+</body>
+</html>
+
