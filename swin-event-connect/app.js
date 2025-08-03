@@ -260,8 +260,8 @@ const AppMain = {
       filterType: "",
       currentPage: 1,
       eventsPerPage: 3,
-      userInterests: {}, 
-      userJoined: {}, 
+      userInterests: {},
+      userJoined: {},
     }
   },
   computed: {
@@ -287,19 +287,23 @@ const AppMain = {
         return
       }
       this.currentUser = this.loginEmail
+      localStorage.setItem("currentUser", this.currentUser) // Add this line
       this.loginEmail = ""
     },
     logout() {
       this.currentUser = null
+      localStorage.removeItem("currentUser") // Add this line
       this.userInterests = {}
       this.userJoined = {}
+      localStorage.removeItem(`userInterests_${this.currentUser}`) // Ensure these are cleared for the *previous* user
+      localStorage.removeItem(`userJoined_${this.currentUser}`) // Ensure these are cleared for the *previous* user
     },
     toggleForm() {
       this.showForm = !this.showForm
     },
     extractHostName(email) {
       if (email.endsWith("@swin.edu.au")) {
-        // For staff 
+        // For staff
         const name = email.split("@")[0]
         const parts = name.split(".")
         if (parts.length >= 2) {
@@ -323,20 +327,24 @@ const AppMain = {
       const newE = {
         ...this.newEvent,
         user: this.currentUser,
-        hostName: this.extractHostName(this.currentUser), 
+        hostName: this.extractHostName(this.currentUser),
         interested: 0,
       }
       this.events.unshift(newE)
       this.saveEvents()
       this.resetForm()
+      this.currentPage = 1 // Add this line to go to the first page
     },
     editEvent(index) {
-      const realIndex = (this.currentPage - 1) * this.eventsPerPage + index
-      const edited = prompt("Edit description:", this.events[realIndex].desc)
-      if (edited) {
-        this.events[realIndex].desc = edited
-        this.saveEvents()
-      }
+      const realIndex = (this.currentPage - 1) * this.eventsPerPage + index;
+      this.editingEventIndex = realIndex;
+      this.newEvent = { ...this.events[realIndex] };
+      this.showForm = true;
+
+      this.$nextTick(() => {
+        const formSection = document.querySelector(".form-section");
+        if (formSection) formSection.scrollIntoView({ behavior: "smooth" });
+      });
     },
     deleteEvent(index) {
       const realIndex = (this.currentPage - 1) * this.eventsPerPage + index
@@ -404,6 +412,13 @@ const AppMain = {
     },
   },
   mounted() {
+    // Load current user from localStorage first
+    const savedUser = localStorage.getItem("currentUser")
+    if (savedUser) {
+      this.currentUser = savedUser
+      this.loadUserData() // Load user-specific data if user is found
+    }
+
     fetch("swin-events.json")
       .then((res) => res.json())
       .then((fetchedData) => {
