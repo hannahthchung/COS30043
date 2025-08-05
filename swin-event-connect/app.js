@@ -319,12 +319,12 @@ const AppMain = {
         const studentId = email.split("@")[0]
         return `Student ${studentId}`
       } else {
-        // Fallback for unexpected email formats: try to format as a name or just use the part before @
+        // Fallback for unexpected email formats
         const parts = email.split("@")[0].split(".")
         if (parts.length >= 1) {
           return parts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ")
         }
-        return email.split("@")[0] // Fallback to just the username part
+        return email.split("@")[0]
       }
     },
     addEvent() {
@@ -434,8 +434,7 @@ const AppMain = {
         } else {
           currentEvents = fetchedData
         }
-
-        // Assign events directly; hostName is now expected to be in the JSON
+        
         this.events = currentEvents
         this.saveEvents()
       })
@@ -459,3 +458,4 @@ const AppMain = {
 }
 
 createApp({ components: { AppMain } }).mount("#app")
+
