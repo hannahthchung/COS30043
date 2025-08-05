@@ -291,12 +291,16 @@ const AppMain = {
       this.loginEmail = ""
     },
     logout() {
+      const prevUser = this.currentUser // Store current user before setting to null
       this.currentUser = null
-      localStorage.removeItem("currentUser") // Add this line
+      localStorage.removeItem("currentUser")
       this.userInterests = {}
       this.userJoined = {}
-      localStorage.removeItem(`userInterests_${this.currentUser}`) // Ensure these are cleared for the *previous* user
-      localStorage.removeItem(`userJoined_${this.currentUser}`) // Ensure these are cleared for the *previous* user
+      // Remove user-specific data for the user who just logged out
+      if (prevUser) {
+        localStorage.removeItem(`userInterests_${prevUser}`)
+        localStorage.removeItem(`userJoined_${prevUser}`)
+      }
     },
     toggleForm() {
       this.showForm = !this.showForm
@@ -445,8 +449,13 @@ const AppMain = {
         this.loadUserData()
       }
     },
+    searchTerm() {
+      this.currentPage = 1
+    },
+    filterType() {
+      this.currentPage = 1
+    },
   },
 }
 
 createApp({ components: { AppMain } }).mount("#app")
-
