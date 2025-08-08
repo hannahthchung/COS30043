@@ -319,25 +319,27 @@ const AppMain = {
         const studentId = email.split("@")[0]
         return `Student ${studentId}`
       } else {
-        // Fallback for unexpected email formats
+        // Fallback for unexpected email formats: try to format as a name or just use the part before @
         const parts = email.split("@")[0].split(".")
         if (parts.length >= 1) {
           return parts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ")
         }
-        return email.split("@")[0]
+        return email.split("@")[0] // Fallback to just the username part
       }
     },
     addEvent() {
       const newE = {
         ...this.newEvent,
         user: this.currentUser,
-        hostName: this.extractHostName(this.currentUser),
+        hostName: this.currentUser === "104050740@student.swin.edu.au" 
+        ? "Han Thanh Chung" 
+        : this.extractHostName(this.currentUser),
         interested: 0,
       }
       this.events.unshift(newE)
       this.saveEvents()
       this.resetForm()
-      this.currentPage = 1 // Add this line to go to the first page
+      this.currentPage = 1
     },
     editEvent(index) {
       const realIndex = (this.currentPage - 1) * this.eventsPerPage + index;
@@ -434,7 +436,8 @@ const AppMain = {
         } else {
           currentEvents = fetchedData
         }
-        
+
+        // Assign events directly; hostName is now expected to be in the JSON
         this.events = currentEvents
         this.saveEvents()
       })
@@ -458,4 +461,3 @@ const AppMain = {
 }
 
 createApp({ components: { AppMain } }).mount("#app")
-
